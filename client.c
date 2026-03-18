@@ -27,6 +27,7 @@ int main() {
     }
     for(int i=0;i<10;i++)
     {
+     printf("write a message for the server:");
      scanf("%s",msg);
      send(sock, msg, strlen(msg), 0);
     }
