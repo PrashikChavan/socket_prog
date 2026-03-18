@@ -23,7 +23,7 @@ int main()
  
  new_socket =accept(server_fd,(struct sockaddr *)&address, (socklen_t*)&addrlen);
 
- while(int i=0;i<10;i++)
+ for(int i=0;i<10;i++)
  {
   int bytes=read(new_socket,buf,1024);
   if(bytes>0)
