@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+
+int main() {
+    int sock;
+    struct sockaddr_in serv_addr;
+    char msg[1024];
+
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(8080);
+
+    inet_pton(AF_INET, "127.16.0.100", &serv_addr.sin_addr);
+
+    connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+    while(int i=0;i<10;i++)
+    {
+     scanf("%s",&msg);
+     send(sock, msg, strlen(msg), 0);
+    }
+    close(sock);
+    return 0;
+}
