@@ -16,7 +16,7 @@ int main() {
     inet_pton(AF_INET, "127.16.0.100", &serv_addr.sin_addr);
 
     connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
-    while(int i=0;i<10;i++)
+    for(int i=0;i<10;i++)
     {
      scanf("%s",msg);
      send(sock, msg, strlen(msg), 0);
