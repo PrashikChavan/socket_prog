@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
-
+#include <string.h>
 int main() {
     int sock;
     struct sockaddr_in serv_addr;
@@ -18,7 +18,7 @@ int main() {
     connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
     while(int i=0;i<10;i++)
     {
-     scanf("%s",&msg);
+     scanf("%s",msg);
      send(sock, msg, strlen(msg), 0);
     }
     close(sock);
