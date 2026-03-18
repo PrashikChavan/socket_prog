@@ -12,7 +12,7 @@ int main()
  int addrlen=sizeof(address);
  char buf[1024]={0};
 
- srv_fd=socket(AF_INET,SOCK_STREAM,0);
+ server_fd=socket(AF_INET,SOCK_STREAM,0);
 
  address.sin_family= AF_INET;
  address.sin_addr.s_addr=INADDR_ANY;
@@ -25,11 +25,19 @@ int main()
 
  while(int i=0;i<10;i++)
  {
-  char msg=read(new_socket,buf,1024);
-  if(msg!='\0')
+  int bytes=read(new_socket,buf,1024);
+  if(bytes>0)
 	  printf("Message is:%s\n",buf);
-  else
+  else if(bytes==0)
+  {
+	  printf("client is not sending any message!");
 	  break;
+  }
+  else
+  {
+   printf("Error is generated!");
+   break;
+  }
  }
 
  close(new_socket);
