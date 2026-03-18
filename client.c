@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
 #include <string.h>
 int main() {
     int sock;
@@ -13,9 +14,17 @@ int main() {
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(8080);
 
-    inet_pton(AF_INET, "127.16.0.100", &serv_addr.sin_addr);
+    if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0)
+    {
+     printf("invalid address\n");
+     return 1;
+    }
 
-    connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+    if(connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr))<0)
+    {
+     printf("connection failed");
+     return 1;
+    }
     for(int i=0;i<10;i++)
     {
      scanf("%s",msg);
